@@ -54,6 +54,7 @@
     (js . t)
     (typescript . t)
     ;; Include other languages here...
+    (cpp . t)
     ))
 
 ;; Run/highlight code using babel in org-mode
