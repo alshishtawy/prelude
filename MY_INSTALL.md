@@ -1,6 +1,8 @@
 # Emacs 30.1 + Prelude Setup Guide (WSL/Ubuntu)
 
-This guide covers how to compile Emacs 30.1 from source with recommended features and set up the Prelude Emacs configuration optimized for web development, Rust, and C++.
+This guide covers how to compile Emacs 30.1 from source with recommended
+features and set up the Prelude Emacs configuration optimized for web
+development, Rust, and C++.
 
 ---
 
@@ -14,7 +16,7 @@ sudo apt install -y \
   libgccjit-12-dev libjansson-dev libharfbuzz-dev libtree-sitter-dev \
   libcairo2-dev libxml2-dev libmagickwand-dev libxft-dev \
   texinfo libacl1-dev libgpm-dev git curl
-````
+```
 
 ---
 
@@ -104,7 +106,8 @@ sudo apt install -y editorconfig
 
 ## 6. Optional: Tree-sitter Language Grammar Setup
 
-Emacs 30.1 includes Tree-sitter support. To enable syntax trees for additional languages:
+Emacs 30.1 includes Tree-sitter support. To enable syntax trees for additional
+languages:
 
 ```elisp
 ;; Example for Rust
@@ -118,10 +121,13 @@ You can manage grammars manually or use the `treesit-auto` package.
 
 ## 7. Notes
 
-* The `--with-json` flag is no longer needed (JSON support is built-in in 30.1).
-* Only use `sudo make install` if you're installing to system paths like `/usr/local`.
-* The `--with-mailutils` flag is only needed if you want legacy `rmail`/`movemail` support — not required for development.
-* Native compilation is enabled by default, but `--with-native-compilation=aot` forces ahead-of-time bytecode compilation.
+- The `--with-json` flag is no longer needed (JSON support is built-in in 30.1).
+- Only use `sudo make install` if you're installing to system paths like
+  `/usr/local`.
+- The `--with-mailutils` flag is only needed if you want legacy
+  `rmail`/`movemail` support — not required for development.
+- Native compilation is enabled by default, but `--with-native-compilation=aot`
+  forces ahead-of-time bytecode compilation.
 
 ---
 
@@ -129,11 +135,11 @@ You can manage grammars manually or use the `treesit-auto` package.
 
 This setup provides:
 
-* A GUI-capable, fast Emacs with native compilation and Tree-sitter
-* Full Prelude configuration
-* Ready-to-go environment for:
+- A GUI-capable, fast Emacs with native compilation and Tree-sitter
+- Full Prelude configuration
+- Ready-to-go environment for:
 
-  * Web dev (HTML, CSS, JS, React, Django)
-  * C++ (clangd, LSP, linting)
-  * Rust (rust-analyzer, cargo)
-  * Python (venv, flake8, black)
+  - Web dev (HTML, CSS, JS, React, Django)
+  - C++ (clangd, LSP, linting)
+  - Rust (rust-analyzer, cargo)
+  - Python (venv, flake8, black)
