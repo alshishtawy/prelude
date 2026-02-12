@@ -16,6 +16,8 @@ sudo apt install -y \
   libgccjit-12-dev libjansson-dev libharfbuzz-dev libtree-sitter-dev \
   libcairo2-dev libxml2-dev libmagickwand-dev libxft-dev \
   texinfo libacl1-dev libgpm-dev git curl
+# for vterm
+sudo apt install cmake libtool-bin libvterm-dev
 ```
 
 ---
@@ -94,6 +96,26 @@ Install Node.js + JS tooling:
 ```bash
 sudo apt install -y nodejs npm
 sudo npm install -g eslint prettier
+```
+
+For vterm integration
+
+add to ~/.bashrc
+
+```bash
+vterm_printf() {
+    if [ -n "$TMUX" ]; then
+        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+    else
+        printf "\e]%s\e\\" "$1"
+    fi
+}
+
+# Directory Tracking for Bash
+vterm_prompt_end() {
+    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
+}
+PS1=$PS1'\[$(vterm_prompt_end)\]'
 ```
 
 Optional:
