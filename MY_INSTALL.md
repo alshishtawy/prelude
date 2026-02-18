@@ -63,7 +63,8 @@ source ~/.bashrc  # or ~/.zshrc
 ## 4. Install Prelude
 
 ```bash
-git clone --depth 1 https://github.com/bbatsov/prelude.git ~/.emacs.d
+git clone git@github.com:alshishtawy/prelude.git
+ln -s "$(pwd)/prelude" ~/.emacs.d
 ```
 
 Start Emacs and let it install its packages.
@@ -98,24 +99,18 @@ sudo apt install -y nodejs npm
 sudo npm install -g eslint prettier
 ```
 
-For vterm integration
-
-add to ~/.bashrc
+For vterm shell integration (directory tracking, clear, etc.), add to `~/.bashrc`:
 
 ```bash
-vterm_printf() {
-    if [ -n "$TMUX" ]; then
-        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
-    else
-        printf "\e]%s\e\\" "$1"
-    fi
-}
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    source ~/.emacs.d/elpa/vterm-*/etc/emacs-vterm-bash.sh
+fi
+```
 
-# Directory Tracking for Bash
-vterm_prompt_end() {
-    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
-}
-PS1=$PS1'\[$(vterm_prompt_end)\]'
+Install fonts for vterm Unicode glyph support (symbols, icons, box-drawing):
+
+```bash
+sudo apt install -y fonts-symbola
 ```
 
 Optional:
