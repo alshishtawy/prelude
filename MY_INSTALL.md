@@ -81,7 +81,13 @@ sudo apt install -y \
   tidy jq clang clangd cppcheck \
   python3 python3-pip python3-venv
 
-pip3 install flake8 black isort
+sudo apt install -y pipx
+pipx ensurepath
+source ~/.bashrc
+pipx install flake8
+pipx install black
+pipx install isort
+pipx install virtualenvwrapper
 ```
 
 Install Rust:
@@ -99,9 +105,15 @@ sudo apt install -y nodejs npm
 sudo npm install -g eslint prettier
 ```
 
-For vterm shell integration (directory tracking, clear, etc.), add to `~/.bashrc`:
+Add virtualenvwrapper and vterm shell integration to `~/.bashrc`:
 
 ```bash
+# virtualenvwrapper (installed via pipx)
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/pipx/venvs/virtualenvwrapper/bin/python
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+# vterm shell integration (directory tracking, clear, etc.)
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     source ~/.emacs.d/elpa/vterm-*/etc/emacs-vterm-bash.sh
 fi
