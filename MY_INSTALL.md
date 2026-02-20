@@ -101,8 +101,22 @@ rustup component add rust-analyzer
 Install Node.js + JS tooling:
 
 ```bash
-sudo apt install -y nodejs npm
-sudo npm install -g eslint prettier
+# Install fnm (Fast Node Manager) via cargo
+cargo install fnm
+
+# Add to ~/.bashrc
+eval "$(fnm env --use-on-cd)"
+
+# Reload shell, then install latest LTS and set as default
+fnm install --lts
+fnm default lts-latest
+
+# Enable pnpm via Corepack (bundled with Node.js since v16.9)
+corepack enable
+corepack prepare pnpm@latest --activate
+
+# Install JS tooling globally
+pnpm add -g eslint prettier
 ```
 
 Add virtualenvwrapper and vterm shell integration to `~/.bashrc`:
