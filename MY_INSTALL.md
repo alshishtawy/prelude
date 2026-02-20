@@ -13,7 +13,7 @@ sudo apt update
 sudo apt install -y \
   build-essential libgtk-3-dev libgnutls28-dev libtiff-dev \
   libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev \
-  libgccjit-12-dev libjansson-dev libharfbuzz-dev libtree-sitter-dev \
+  libgccjit-$(gcc -dumpversion | cut -d. -f1)-dev libjansson-dev libharfbuzz-dev libtree-sitter-dev \
   libcairo2-dev libxml2-dev libmagickwand-dev libxft-dev \
   texinfo libacl1-dev libgpm-dev git curl
 # for vterm
@@ -63,8 +63,8 @@ source ~/.bashrc  # or ~/.zshrc
 ## 4. Install Prelude
 
 ```bash
-git clone git@github.com:alshishtawy/prelude.git
-ln -s "$(pwd)/prelude" ~/.emacs.d
+git clone git@github.com:alshishtawy/prelude.git ~/prelude
+ln -s ~/prelude ~/.emacs.d
 ```
 
 Start Emacs and let it install its packages.
@@ -79,7 +79,7 @@ Install tools used by Prelude for spell-checking, linting, and navigation:
 sudo apt install -y \
   aspell aspell-en ripgrep shellcheck \
   tidy jq clang clangd cppcheck \
-  python3 python3-pip python3-venv
+  python3 python3-venv
 
 sudo apt install -y pipx
 pipx ensurepath
@@ -104,10 +104,7 @@ Install Node.js + JS tooling:
 # Install fnm (Fast Node Manager) via cargo
 cargo install fnm
 
-# Add to ~/.bashrc
-eval "$(fnm env --use-on-cd)"
-
-# Reload shell, then install latest LTS and set as default
+# After adding fnm to ~/.bashrc (see below) and reloading your shell:
 fnm install --lts
 fnm default lts-latest
 
@@ -122,6 +119,9 @@ pnpm add -g eslint prettier
 Add virtualenvwrapper and vterm shell integration to `~/.bashrc`:
 
 ```bash
+# fnm (Fast Node Manager)
+eval "$(fnm env --use-on-cd)"
+
 # virtualenvwrapper (installed via pipx)
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/pipx/venvs/virtualenvwrapper/bin/python
@@ -165,6 +165,7 @@ You can manage grammars manually or use the `treesit-auto` package.
 ## 7. Notes
 
 - The `--with-json` flag is no longer needed (JSON support is built-in in 30.1).
+- `--with-x --with-x-toolkit=gtk3` requires a working X server. On WSL2 with Windows 11, WSLg provides this automatically. On Windows 10, install VcXsrv and set `DISPLAY=:0` in your `.bashrc`.
 - Only use `sudo make install` if you're installing to system paths like
   `/usr/local`.
 - The `--with-mailutils` flag is only needed if you want legacy
